@@ -1,4 +1,3 @@
-
 let fahrenheit;
 let kelvin;
 
@@ -33,18 +32,40 @@ console.log(resultadoCelsius("celcius",32));
 // dom
 
 const modo = document.getElementById("modo");
-const modoCelsius = document.getElementById("modo-celsius");
 const inputTemp = document.getElementById("input-temp")
 const valFar = document.getElementById('fahrenheit-valor');
 const valKel = document.getElementById('kelvin-valor');
 const btnConvertir = document.getElementById('btn-convertir');
 
+// NUEVO: alerta de error y unidad elegida
+const alertaError = document.getElementById("alerta-error");
+let unidadActual = null;
 
-function aplicarModo(){
-    modo.textContent = "Celsius";
+// NUEVO: todos los items del dropdown que tengan data-unidad
+const itemsUnidad = document.querySelectorAll("[data-unidad]");
+
+
+// CAMBIADO: ahora recibe el item clickeado, lee su dataset y guarda en localStorage
+function aplicarModo(item){
+    modo.textContent = item.textContent.trim();
+    unidadActual = item.dataset.unidad;
+    localStorage.setItem("unidad", unidadActual);
 }
 
-modoCelsius.addEventListener("click",aplicarModo);
+itemsUnidad.forEach(function(item){
+    item.addEventListener("click", function(){
+        aplicarModo(item);
+    });
+});
+
+// NUEVO: al cargar la página, recuperar la unidad guardada
+const unidadGuardada = localStorage.getItem("unidad");
+if(unidadGuardada){
+    const itemGuardado = document.querySelector('[data-unidad="' + unidadGuardada + '"]');
+    if(itemGuardado){
+        aplicarModo(itemGuardado);
+    }
+}
 
 function resultado(){
     return inputTemp.value;
@@ -53,8 +74,37 @@ function resultado(){
 inputTemp.addEventListener('keydown',resultado)
 
 
+// NUEVO: mostrar y ocultar el error
+function mostrarError(mensaje){
+    alertaError.textContent = mensaje;
+    alertaError.classList.remove("d-none");
+}
+
+function ocultarError(){
+    alertaError.classList.add("d-none");
+    inputTemp.classList.remove("is-invalid");
+}
+
+
 function obtenerResultado(){
-    const conversionArr = resultadoCelsius("celcius",Number(resultado()));
+    ocultarError();
+
+    // NUEVO: 1. ¿eligió la unidad?
+    if(!unidadActual){
+        mostrarError("Primero selecciona la unidad");
+        return;
+    }
+
+    // NUEVO: 2. ¿escribió un número?
+    const texto = resultado().trim();
+    if(texto === "" || Number.isNaN(Number(texto))){
+        mostrarError("Ingresa solo números");
+        inputTemp.classList.add("is-invalid");
+        return;
+    }
+
+    // CAMBIADO: en vez de "celcius" fijo, usa la unidad elegida
+    const conversionArr = resultadoCelsius(unidadActual,Number(texto));
 
     valFar.textContent = conversionArr[0];
     valKel.textContent = conversionArr[1];

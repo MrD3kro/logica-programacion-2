@@ -32,20 +32,28 @@
 
       <h1 class="text-center">Convierte cualquier grado Celsiusº</h1>
 
+      <!-- NUEVO: alerta de error (oculta por defecto) -->
+      <div id="alerta-error" class="alert alert-danger d-none" role="alert"></div>
+
       <div class="input-group mb-3">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
           aria-expanded="false"><span id="modo">Elige la unidad</span></button>
         <ul class="dropdown-menu">
-          <li id="modo-celsius"><a class="dropdown-item " >Celsius</a></li>
+          <!-- CAMBIADO: data-unidad en cada li (antes id="modo-celsius") -->
+          <li data-unidad="celcius"><a class="dropdown-item " >Celsius</a></li>
            <li>
             <hr class="dropdown-divider ">
           </li>
-          <li><a class="dropdown-item disabled" href="#">Fahrenheit</a></li>
-          <li><a class="dropdown-item disabled" href="#">Kelvin</a></li>
+          <li data-unidad="fahrenheit"><a class="dropdown-item disabled" href="#">Fahrenheit</a></li>
+          <li data-unidad="kelvin"><a class="dropdown-item disabled" href="#">Kelvin</a></li>
         </ul>
         <input type="text" class="form-control " id="input-temp" placeholder="Ingresa la temperatura a convertir" aria-label="Text input with dropdown button">
       </div>
-      <button type="button" class="btn btn-dark btn-lg"  id="btn-convertir">convertir</button>
+
+      <!-- NUEVO: contenedor para centrar el botón -->
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-dark btn-lg"  id="btn-convertir">convertir</button>
+      </div>
 
       <div class="row">
         <p>Fahrenheit</p><span id="fahrenheit-valor">---</span>
