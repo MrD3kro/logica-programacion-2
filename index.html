@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conversor Celsius</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar bg-body-tertiary bg-dark border-bottom border-body " data-bs-theme="dark">
+      <div class="container-fluid flex justify-content-center">
+        <a class="navbar-brand " href="index.html">
+          <img src="assets/termometro-pixel.svg" alt="Logo" width="60" height="60"
+            class="d-inline-block align-text-center">
+          Conversor Celsius
+        </a>
+      </div>
+    </nav>
+  </header>
+
+
+  <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout"></div>
+  <main class="bd-main ">
+
+    <div class="container-fluid container-sm">
+
+      <h1 class="text-center">Convierte cualquier grado Celsiusº</h1>
+
+      <div class="input-group mb-3">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false"><span id="modo">Elige la unidad</span></button>
+        <ul class="dropdown-menu">
+          <li id="modo-celsius"><a class="dropdown-item " >Celsius</a></li>
+           <li>
+            <hr class="dropdown-divider ">
+          </li>
+          <li><a class="dropdown-item disabled" href="#">Fahrenheit</a></li>
+          <li><a class="dropdown-item disabled" href="#">Kelvin</a></li>
+        </ul>
+        <input type="text" class="form-control " id="input-temp" placeholder="Ingresa la temperatura a convertir" aria-label="Text input with dropdown button">
+      </div>
+      <button type="button" class="btn btn-dark btn-lg"  id="btn-convertir">convertir</button>
+
+      <div class="row">
+        <p>Fahrenheit</p><span id="fahrenheit-valor">---</span>
+        <p>Kelvin</p><span id="kelvin-valor">---</span> 
+      </div>
+ 
+
+
+    </div>
+
+    </div>
+  </main>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
